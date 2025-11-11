@@ -1,0 +1,11 @@
+﻿{
+  "ts": "2025/11/06 17:25:49",
+  "task_id": "ACK-views-20251106",
+  "test_status": "ERROR",
+  "coverage": null,
+  "evidence": {
+    "coverage_xml": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\coverage.xml",
+    "pytest_report": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\data\\\\logs\\\\current\\\\pytest_report.txt",
+    "metrics_json": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\artifacts\\ACK-views-20251106\\metrics.json"
+  }
+}\n
