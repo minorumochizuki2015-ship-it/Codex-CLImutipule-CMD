@@ -21,7 +21,7 @@ jobs:
   ruff:
     name: Ruff Lint
     runs-on: ubuntu-latest
-    continue-on-error: ${{ github.event_name == 'pull_request' }}
+    continue-on-error: true
     timeout-minutes: 5
     steps:
       - name: Checkout
@@ -167,6 +167,7 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
     timeout-minutes: 15
     strategy:
       matrix:
