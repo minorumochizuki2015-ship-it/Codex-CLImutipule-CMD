@@ -29,7 +29,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.12'
       - name: Install uv
         run: curl -Ls https://astral.sh/uv/install.sh | sh
       - name: Add uv to PATH
@@ -78,7 +78,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.12'
       - name: Install uv
         run: curl -Ls https://astral.sh/uv/install.sh | sh
       - name: Add uv to PATH
@@ -145,7 +145,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.12'
       - name: Install uv
         run: curl -Ls https://astral.sh/uv/install.sh | sh
       - name: Add uv to PATH
@@ -171,7 +171,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        python-version: ['3.12', '3.14']
+        python-version: ['3.12', '3.13']
       fail-fast: false
     steps:
       - name: Checkout
