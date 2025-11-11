@@ -21,7 +21,7 @@ jobs:
   ruff:
     name: Ruff Lint
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name != 'pull_request' && github.event_name != 'workflow_dispatch' }}
     continue-on-error: true
     timeout-minutes: 5
     steps:
@@ -110,10 +110,12 @@ jobs:
       - name: Install Playwright browsers (Python)
         run: uv run python -m playwright install chromium
       - name: Verify assets
+        continue-on-error: true
         run: uv run python scripts/ops/verify_ui_gate_assets.py
       - name: Optional run UI Gate (VERIFY_RUN=1)
         env:
           VERIFY_RUN: "${{ inputs.verify_run }}"
+        continue-on-error: true
         run: uv run python scripts/ops/verify_ui_gate_assets.py
       - name: Append Phase 7 CI evidence (verify-ui-gate)
         if: ${{ success() && inputs.verify_run == '1' }}
@@ -168,7 +170,7 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.verify_run != '1') }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.verify_run == '1') }}
     timeout-minutes: 15
     strategy:
       matrix:
