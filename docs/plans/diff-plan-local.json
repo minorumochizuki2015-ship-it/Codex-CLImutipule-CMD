@@ -1,0 +1,10 @@
+{
+  "updated_at": "2025-11-07T10:30:00+09:00",
+  "notes": [
+    "diff-plan.json が自動復元される場合のローカル控えとして利用する",
+    "CI/自動生成対象から外れているため、進捗メモ・監査ログ紐付けを手動で追記する",
+    "ハッシュ監視ログ: data/logs/current/orchestration/diff_plan_hash_watch.log（scripts/watch_diff_plan_fsw.ps1）"
+  ],
+  "summary": "ローカル管理用 diff-plan (auto rollback 回避)",
+  "plan_id": "20251102-mcp-agent-mail-integration-local"
+}

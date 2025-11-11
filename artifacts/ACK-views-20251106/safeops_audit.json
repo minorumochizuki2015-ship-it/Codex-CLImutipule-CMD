@@ -1,0 +1,29 @@
+﻿{
+  "task_id": "ACK-views-20251106",
+  "timestamp": "2025/11/06 17:44:18",
+  "test_status": "PASSED",
+  "coverage": null,
+  "evidence_paths": {
+    "builder_report": "C:\\\\Users\\\\User\\\\Trae\\\\multi-agent\\\\TRAE SOLO Builder Report.txt",
+    "pytest_report": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\data\\\\logs\\\\current\\\\pytest_report.txt",
+    "metrics_json": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\artifacts\\\\ACK-views-20251106\\metrics.json",
+    "artifacts_dir": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\artifacts\\\\ACK-views-20251106",
+    "coverage_xml": "c:\\Users\\User\\Trae\\Codex-CLImutipule-CMD\\coverage.xml"
+  },
+  "checks": [
+    {
+      "check": "pytest_ack_views",
+      "status": true,
+      "message": "PASSED",
+      "details": {
+        "test": "tests/test_ack_views_details.py::test_ack_overdue_and_stale_detail_fields"
+      }
+    },
+    {
+      "check": "coverage_nonzero",
+      "status": false,
+      "message": "coverage=",
+      "details": {}
+    }
+  ]
+}

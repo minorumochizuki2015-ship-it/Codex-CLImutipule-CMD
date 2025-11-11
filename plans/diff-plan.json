@@ -1,0 +1,67 @@
+{
+  "created_at": "2025-11-04T13:30:00Z",
+  "updated_at": "2025-11-06T15:50:00Z",
+  "plan_id": "20251104-mvp-readiness",
+  "summary": "AUIDIT監査報告の指摘を MVP 水準で解消する計画。18080/18081 サーバ検証、mail 監査、UI 自動検証、pytest・ACK クリーンアップ、cleanup ログ確定、.venv 再構築、python プロセス整理までを段階管理する。",
+  "tests": [
+    ".\\.venv\\Scripts\\python.exe tools/monitoring/validate_ports.py --ports 18080 18081 --output data/logs/current/monitoring/api_models_test.json",
+    ".\\.venv\\Scripts\\python.exe scripts/mail_lightning_audit.py --store-json workspaces/shared/governingcore_v5_slice/data/lightning_store_export.json --mail-root mcp_agent_mail --output data/logs/current/audit/mail_lightning_audit_TEST.log",
+    "pwsh -File scripts/invoke_in_repo_root.ps1 -m pytest tests/test_ack_views_details.py -vv --maxfail=1",
+    "npm run playwright -- --reporter=list",
+    "pwsh -NoProfile -Command \"Test-NetConnection 127.0.0.1 -Port 18080\"",
+    "pwsh -NoProfile -Command \"Test-NetConnection 127.0.0.1 -Port 18081\"",
+    "pwsh -NoProfile -Command \"Get-Process python\""
+  ],
+  "steps": [
+    {
+      "id": "venv-reprovision",
+      "status": "pending",
+      "description": "uv で .venv を再構築し、fastmcp/aiosqlite/python-decouple/sqlmodel/Pillow/litellm など必須依存を導入して証跡を残す。"
+    },
+    {
+      "id": "ports-18080-hardening",
+      "status": "in_progress",
+      "description": "llama_cpp.server を 18080/18081 で常駐させ、validate_ports・Get-NetTCPConnection・Test-NetConnection の結果と chat completion ログの SHA256 を揃える。"
+    },
+    {
+      "id": "screenshots-archive",
+      "status": "pending",
+      "description": "監査指摘のスクリーンショットを取得して SHA256 を算出、README と archive ポリシーを更新し placeholder を処理する。"
+    },
+    {
+      "id": "ui-automation-refresh",
+      "status": "pending",
+      "description": "start_modern_ui.bat の Dry-Run→Apply→確認と Playwright/axe の再取得ログで docs/multi_agent_terminal_checklist_v1.md を更新する。"
+    },
+    {
+      "id": "mail-audit-production",
+      "status": "pending",
+      "description": "LightningStore/Mail 実データで mail_lightning_audit.py を再実行し、cmd報告書と手順書に最新ログと SHA256 を反映する。"
+    },
+    {
+      "id": "pytest-sqlite-cleanup",
+      "status": "in_progress",
+      "description": "invoke_in_repo_root.ps1 ではなくテスト固定具でストレージを掃除し、shutil.rmtree(ignore_errors=True) で Windows の PermissionError を抑止する。"
+    },
+    {
+      "id": "ack-views-ttl-fix",
+      "status": "in_progress",
+      "description": "acks-stale/ack-overdue/inbox/outbox 等の FastMCP リソース URI に {?project,...} を付与し、ttl_seconds=0 や limit クエリを通しつつ pytest で age_seconds を検証する。"
+    },
+    {
+      "id": "cleanup-report-finalize",
+      "status": "pending",
+      "description": "codex_cleanup_plan_* ログと report-cleanup ステップ完了の証跡を揃え、cmd報告書.txt に記録する。"
+    },
+    {
+      "id": "python-process-cleanup",
+      "status": "pending",
+      "description": "Get-Process / Stop-Process で常駐 python.exe を整理し、前後の一覧と SHA256 を記録する。"
+    },
+    {
+      "id": "coverage-increase",
+      "status": "pending",
+      "description": "ACKビュー周辺の単体テストを追加し、coverage ≥ 30% を目標に tests/test_ack_views_details_*.py を拡充する。対象: tests/test_ack_views_details.py, tests/test_ack_views_details_limit.py を新設。期限: 2025-11-09。"
+    }
+  ]
+}
