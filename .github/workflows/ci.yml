@@ -137,7 +137,7 @@ jobs:
   ty:
     name: Ty Type Check
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.verify_run != '1') }}
     timeout-minutes: 5
     steps:
       - name: Checkout
@@ -167,7 +167,7 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.verify_run != '1') }}
     timeout-minutes: 15
     strategy:
       matrix:
